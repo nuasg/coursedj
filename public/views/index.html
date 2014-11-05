@@ -1,0 +1,131 @@
+<!-- public/views/index.html -->
+<!DOCTYPE html>
+
+<!-- Angular Module -->
+<html ng-app="CourseDJ" class="no-js">
+<head>
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>CourseDJ</title>
+
+	<!-- Angular, Fonts, and Icons -->
+	<script src="/resources/angular.min.js"></script>
+	<link rel="shortcut icon" href="/img/boxes.ico">
+  <link href='http://fonts.googleapis.com/css?family=Arvo|Roboto' rel='stylesheet' type='text/css'>
+
+</head>
+
+<!-- load user data into angular controller -->
+<body ng-controller="mainController">
+	<div class="header">
+		<img src="/img/boxes.ico">
+		<span class="title">CourseDJ</span>
+		<span>Scheduling, simplified</span>
+	</div>
+
+	<div class="row" id="body" ng-show="loaded">
+
+		<!-- Class Selection Column -->
+		<div class="col-sm-4 col-lg-3" id="form">
+			<div class="class-add panel panel-default">
+				<div class="panel-heading form-title">
+					Pick Your Classes
+				</div>
+				<div class="panel-body">
+					<div>Term</div>
+					<select ng-model="term">
+						<option value="4560">2014 Fall</option>
+						<option value="4530">2014 Winter</option>
+						<option value="4540">2014 Spring</option>
+					</select>
+					<div>Subject</div>
+					<div class="subject">
+						<select ng-model="selectedSubject" ng-options="subject.name for subject in subjects" class="selected-sub"></select>
+					</div>
+						
+					<div ng-show="selectedSubject"><div>Course</div>
+						<span ng-show="!coursesLoaded" class="fa fa-spinner fa-spin"></span>
+						<select ng-hide="!coursesLoaded || isEmptyArray(courses)" ng-model="selectedCourse" ng-options="course.subject + ' ' + course.catalog_num + ': ' + course.title for course in courses"></select>
+						<div ng-show="coursesLoaded && isEmptyArray(courses)">There are no available classes in that subject. Try choosing another subject!</div>
+					</div>
+
+					<div class="selected-course" ng-show="selectedCourse">{{selectedCourse.subject}} {{selectedCourse.catalog_num}}: {{selectedCourse.title}}</div>
+					<button class="add" ng-show="selectedCourse" ng-click="addToSetList(selectedCourse)">Add!</button>
+				</div>
+			</div>
+
+			<div class="class-add panel panel-default">
+				<div class="panel-heading form-title">
+					Classes Added
+				</div>
+				<div class="panel-body">
+					<div ng-show="setList">
+						<div ng-repeat="course in setList">
+							<span class="fa fa-close red" ng-click="removeFromSetList(course)"></span>
+							{{course.subject}} {{course.catalog_num}}: {{course.title}}
+							<form name="priority">
+								<input type="radio" ng-model="course.priority" name="priority" ng-value="1" checked="checked" />Optional
+								<input type="radio" ng-model="course.priority" name="priority" ng-value="2" />Preferred
+								<input type="radio" ng-model="course.priority" name="priority" ng-value="10" />Mandatory
+							</form>
+						</div>
+					</div>
+					<div class="class-count">
+					<form name="count" ng-show="setList[0]">
+						<div>Chosen Classes:</div>
+						<input type="radio" ng-model="courseCount" name="count" ng-value="3" checked="checked" />3
+						<input type="radio" ng-model="courseCount" name="count" ng-value="4" />4
+						<input type="radio" ng-model="courseCount" name="count" ng-value="5" />5
+					</form>
+				</div>
+
+					<button ng-show="setList[0]" ng-click="remix()">Remix!</button>
+
+				</div>
+			</div>
+		</div> <!-- Class Selection Column -->
+
+		<!-- Calendar Column -->
+		<div class="col-sm-8 col-lg-9" id="cal">
+			<div class="panel panel-default panel-full">
+				<div class="panel-body panel-full">
+					<div dhx-scheduler data="events">
+		        <div class="dhx_cal_date"></div>  
+			    <div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+
+<div class="footer" ng-show="loaded">
+	<a href="mailto:asg-services@u.northwestern.edu?Subject=CourseDJ">Questions, concerns, or compliments? <br> Send us an email!</a>
+	<p>&copy; 2014 ASG Services</p>
+</div>
+	
+<!-- Resources -->
+
+<!-- CSS -->
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/resources/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/font-awesome.min.css">
+
+<!-- Imported Resources -->
+<script src="/resources/jquery-2.1.1.min.js"></script>
+<script src="/resources/bootstrap.min.js"></script>
+<script src="/resources/calendar-codebase/dhtmlxscheduler.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/resources/calendar-codebase/dhtmlxscheduler.css" type="text/css"> <!--
+<link rel="stylesheet" href="/resources/calendar-codebase/dhtmlxscheduler_flat.css" type="text/css"> -->
+
+<!-- Angular Custom Components -->
+<script src="/js/coreModule.js"></script>
+<script src="/js/directives/calendarDirective.js"></script>
+<script src="/js/services/mainService.js"></script>
+<script src="/js/controllers/mainCtrl.js"></script>
+
+</body>
+</html>

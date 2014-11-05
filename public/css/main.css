@@ -1,0 +1,102 @@
+/* //// GLOBAL //// */
+html, body{
+  margin: 0;
+  padding: 0 1em 0 1em;
+  height: 100%;
+}
+
+body{
+  background-image: url('/img/dj2.jpg');
+  font-family: "Roboto", sans-serif !important;
+  padding-left: 1em;
+  padding-right: 1em;
+  font-size: 14px !important;
+}
+
+
+/* //// HEADER AND NAVBAR //// */
+.header{
+  color: white;
+  font-family: "Arvo", serif !important;
+}
+.header img{
+  margin-top: -1.75em;
+}
+.title{
+  font-size: 4em;
+}
+
+/* //// MAIN BODY //// */
+#body{
+  height: 80%;
+}
+#form, #cal{
+  height: 100%;
+}
+.panel-full{
+  height: 100%;
+}
+
+.form-title{
+  font-size: 20px;
+}
+
+.add-title{
+  font-size: 18px;
+}
+
+
+
+.class-add.panel.panel-default{
+
+}
+
+.subject{
+
+}
+
+.subject select{
+  max-width: 100%;
+}
+
+.red{
+  color:#ff0000;
+}
+
+.selected-sub{
+}
+
+.selected-course{
+  color: #66CD00;
+}
+
+.class-count{
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+/* //// FOOTER //// */
+.footer{
+  padding-top: 30px;
+  text-align: center;
+}
+.footer a{
+  color: #ffffff;
+}
+.footer a:hover{
+  color: #ffffff;
+}
+.footer p{
+  color:#F5EFD8;
+}
+
+/* //// CALENDAR //// */
+.dhx_cal_container{
+  height: 100%;
+}
+.dhx_cal_navline{
+  display: none;
+}
+.dhx_cal_header, .dhx_cal_data{
+  margin-top: -25px;
+}
