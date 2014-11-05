@@ -13,54 +13,56 @@
 	<!-- Angular, Fonts, and Icons -->
 	<script src="/resources/angular.min.js"></script>
 	<link rel="shortcut icon" href="/img/boxes.ico">
-  <link href='http://fonts.googleapis.com/css?family=Arvo|Roboto' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Roboto|Orbitron' rel='stylesheet' type='text/css'>
 
 </head>
 
 <!-- load user data into angular controller -->
 <body ng-controller="mainController">
-	<div class="header">
-		<img src="/img/boxes.ico">
-		<span class="title">CourseDJ</span>
-		<span>Scheduling, simplified</span>
+	<div class="row header-row" ng-show="loaded">
+		<div class="header col-sm-4 col-md-3 col-lg-2 col-left">
+			<!-- <img src="/img/boxes.ico"> -->
+			<span class="title">CourseDJ</span>
+		</div>
+		<div class="col-sm-8 col-md-9 col-lg-10 col-right"></div>
 	</div>
 
 	<div class="row" id="body" ng-show="loaded">
 
 		<!-- Class Selection Column -->
-		<div class="col-sm-4 col-lg-3" id="form">
-			<div class="class-add panel panel-default">
-				<div class="panel-heading form-title">
+		<div class="col-sm-4 col-md-3 col-lg-2 col-left" id="form">
+			<div class="class-add class-pick">
+				<div class="form-title">
 					Pick Your Classes
 				</div>
-				<div class="panel-body">
-					<div>Term</div>
-					<select ng-model="term">
-						<option value="4560">2014 Fall</option>
-						<option value="4530">2014 Winter</option>
-						<option value="4540">2014 Spring</option>
-					</select>
-					<div>Subject</div>
-					<div class="subject">
-						<select ng-model="selectedSubject" ng-options="subject.name for subject in subjects" class="selected-sub"></select>
-					</div>
-						
-					<div ng-show="selectedSubject"><div>Course</div>
-						<span ng-show="!coursesLoaded" class="fa fa-spinner fa-spin"></span>
-						<select ng-hide="!coursesLoaded || isEmptyArray(courses)" ng-model="selectedCourse" ng-options="course.subject + ' ' + course.catalog_num + ': ' + course.title for course in courses"></select>
-						<div ng-show="coursesLoaded && isEmptyArray(courses)">There are no available classes in that subject. Try choosing another subject!</div>
-					</div>
-
-					<div class="selected-course" ng-show="selectedCourse">{{selectedCourse.subject}} {{selectedCourse.catalog_num}}: {{selectedCourse.title}}</div>
-					<button class="add" ng-show="selectedCourse" ng-click="addToSetList(selectedCourse)">Add!</button>
+				
+				<div>Term</div>
+				<select ng-model="term">
+					<option value="4560">2014 Fall</option>
+					<option value="4530">2014 Winter</option>
+					<option value="4540">2014 Spring</option>
+				</select>
+				<div>Subject</div>
+				<div class="subject">
+					<select ng-model="selectedSubject" ng-options="subject.name for subject in subjects" class="selected-sub"></select>
 				</div>
+					
+				<div ng-show="selectedSubject"><div>Course</div>
+					<span ng-show="!coursesLoaded" class="fa fa-spinner fa-spin"></span>
+					<select ng-hide="!coursesLoaded || isEmptyArray(courses)" ng-model="selectedCourse" ng-options="course.subject + ' ' + course.catalog_num + ': ' + course.title for course in courses"></select>
+					<div ng-show="coursesLoaded && isEmptyArray(courses)">There are no available classes in that subject. Try choosing another subject!</div>
+				</div>
+
+				<div class="selected-course" ng-show="selectedCourse">{{selectedCourse.subject}} {{selectedCourse.catalog_num}}: {{selectedCourse.title}}</div>
+				<button class="add" ng-show="selectedCourse" ng-click="addToSetList(selectedCourse)">Add!</button>
+				
 			</div>
 
-			<div class="class-add panel panel-default">
-				<div class="panel-heading form-title">
+			<div class="class-add">
+				<div class="form-title">
 					Classes Added
 				</div>
-				<div class="panel-body">
+				<div class="">
 					<div ng-show="setList">
 						<div ng-repeat="course in setList">
 							<span class="fa fa-close red" ng-click="removeFromSetList(course)"></span>
@@ -88,24 +90,21 @@
 		</div> <!-- Class Selection Column -->
 
 		<!-- Calendar Column -->
-		<div class="col-sm-8 col-lg-9" id="cal">
-			<div class="panel panel-default panel-full">
+		<div class="col-sm-8 col-md-9 col-lg-10 col-right" id="cal">
+			<div class="panel panel-default panel-full" id="cal-body">
 				<div class="panel-body panel-full">
 					<div dhx-scheduler data="events">
 		        <div class="dhx_cal_date"></div>  
-			    <div>
+			    </div>
 				</div>
+			</div>
+
+			<div class="footer">
+				<a href="mailto:asg-services@u.northwestern.edu?Subject=CourseDJ">Questions, concerns, or compliments? <br> Send us an email!</a>
+				<p>&copy; 2014 ASG Services</p>
 			</div>
 		</div>
 	</div>
-</div>
-</div>
-
-
-<div class="footer" ng-show="loaded">
-	<a href="mailto:asg-services@u.northwestern.edu?Subject=CourseDJ">Questions, concerns, or compliments? <br> Send us an email!</a>
-	<p>&copy; 2014 ASG Services</p>
-</div>
 	
 <!-- Resources -->
 
