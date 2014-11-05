@@ -15,7 +15,7 @@ body{
 /* //// HEADER //// */
 .header{
   color: white;
-  background-color: #71266E;
+  background-color: #1144AA; /* #71266E; */
   padding-top: 1em;
   text-align: center;
 }
@@ -81,11 +81,11 @@ body{
   color: #222;
 }
 .class-pick{
-  border-bottom: 2px solid #71266E;
+  border-bottom: 2px solid #1144AA;
   padding-top: 1em;
 }
 .course{
-  border-bottom: 1px solid #71266e;
+  border-bottom: 1px solid #1144AA;
   margin-top: 3px;
   padding-bottom: 3px;
 }
