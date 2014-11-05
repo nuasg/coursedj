@@ -55,9 +55,7 @@ body{
 }
 .form-title{
   font-size: 20px;
-}
-.add-title{
-  font-size: 18px;
+  font-weight: bold;
 }
 .class-pick select{
   max-width: 100%;
@@ -73,16 +71,21 @@ body{
   margin-top: 20px;
 }
 .class-add{
-  color: #ddd;
+  color: #bbb;
   margin: 5px;
 }
 .class-add select, .class-add button{
   color: #222;
 }
 .class-pick{
-  border-bottom: 1px solid #999;
+  border-bottom: 2px solid #71266E;
   padding-bottom: 1em;
   padding-top: 1em;
+}
+.course{
+  border-bottom: 1px solid #71266e;
+  margin-top: 3px;
+  padding-bottom: 3px;
 }
 
 /* //// FOOTER //// */
