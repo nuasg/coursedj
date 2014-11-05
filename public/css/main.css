@@ -46,6 +46,8 @@ body{
 }
 .col-left{
   height: 100%;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 .col-right{
   height: 100%;
@@ -72,14 +74,14 @@ body{
 }
 .class-add{
   color: #bbb;
-  margin: 5px;
+  margin: 0 1em 1em 1em;
+  padding-bottom: 1em;
 }
 .class-add select, .class-add button{
   color: #222;
 }
 .class-pick{
   border-bottom: 2px solid #71266E;
-  padding-bottom: 1em;
   padding-top: 1em;
 }
 .course{
