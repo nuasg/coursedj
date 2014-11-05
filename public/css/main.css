@@ -1,84 +1,100 @@
 /* //// GLOBAL //// */
 html, body{
   margin: 0;
-  padding: 0 1em 0 1em;
+  padding: 0px;
   height: 100%;
 }
 
 body{
-  background-image: url('/img/dj2.jpg');
+  /* background-image: url('/img/dj2.jpg'); */
+  background-color: #111 !important;
   font-family: "Roboto", sans-serif !important;
-  padding-left: 1em;
-  padding-right: 1em;
   font-size: 14px !important;
 }
 
-
-/* //// HEADER AND NAVBAR //// */
+/* //// HEADER //// */
 .header{
   color: white;
-  font-family: "Arvo", serif !important;
+  background-color: #1144AA; /* #71266E; */
+  padding-top: 1em;
+  text-align: center;
 }
 .header img{
   margin-top: -1.75em;
 }
 .title{
-  font-size: 4em;
+  font-size: 2.5em;
+  font-family: "Orbitron", sans-serif;
+}
+.header-row{
+  background-color: #111;
+  height: 6em;
 }
 
 /* //// MAIN BODY //// */
 #body{
-  height: 80%;
+  height: calc(100% - 6em);
 }
-#form, #cal{
+#cal-body{
+  height: calc(100% - 70px);
+  margin: 0;
+}
+#cal{
+  height: 100%;
+  background-color: #777;
+  padding: 15px;
+}
+.col-left{
+  height: 100%;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.col-right{
   height: 100%;
 }
-.panel-full{
+.panel-body{
   height: 100%;
 }
-
 .form-title{
   font-size: 20px;
+  font-weight: bold;
 }
-
-.add-title{
-  font-size: 18px;
-}
-
-
-
-.class-add.panel.panel-default{
-
-}
-
-.subject{
-
-}
-
-.subject select{
+.class-pick select{
   max-width: 100%;
 }
-
 .red{
   color:#ff0000;
 }
-
-.selected-sub{
-}
-
 .selected-course{
   color: #66CD00;
 }
-
 .class-count{
   margin-bottom: 20px;
   margin-top: 20px;
 }
+.class-add{
+  color: #bbb;
+  margin: 0 1em 1em 1em;
+  padding-bottom: 1em;
+}
+.class-add select, .class-add button{
+  color: #222;
+}
+.class-pick{
+  border-bottom: 2px solid #1144AA;
+  padding-top: 1em;
+}
+.course{
+  border-bottom: 1px solid #1144AA;
+  margin-top: 3px;
+  padding-bottom: 3px;
+}
 
 /* //// FOOTER //// */
 .footer{
-  padding-top: 30px;
+  padding-top: 5px;
   text-align: center;
+  height: 60px;
 }
 .footer a{
   color: #ffffff;
@@ -88,6 +104,11 @@ body{
 }
 .footer p{
   color:#F5EFD8;
+}
+
+/* //// BOOTSTRAP OVERRIDES //// */
+.row{
+  margin: 0 !important;
 }
 
 /* //// CALENDAR //// */
