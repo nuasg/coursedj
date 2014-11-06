@@ -7,7 +7,7 @@ var app = angular.module('mainController', []);
 app.controller('mainController', function($scope, $http, ASG){
 	$scope.loaded = false;
 	$scope.coursesLoaded = true;
-	$scope.term = 4530;
+	$scope.term = 4570;
 	$scope.setList = [];
 	$scope.events = [];
 	$scope.courseCount = 4;
