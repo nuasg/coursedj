@@ -52,7 +52,6 @@ app.controller('mainController', function($scope, $http, ASG){
 			course.priority = 1;
 			hasFullInfo(course);
 			$scope.setList.push(course);
-			console.log(course);
 		}
 		$scope.selectedCourse = false;
 	};
@@ -94,6 +93,29 @@ app.controller('mainController', function($scope, $http, ASG){
 		if ($scope.conflict)
 			alert("Careful! Two or more of your mandatory courses conflict");
 	};
+
+	// Chance 24-hour times to 12-hour format
+	$scope.reduceHour = function(str){
+		if (str != null){
+			var hour = parseInt(str.substring(0, 2), 10);
+			if (hour > 12)
+				hour -= 12;
+			var newStr = hour.toString() + str.substring(2, 5);
+			return newStr;
+		}else{
+			return 'n/a'
+		}
+	}
+
+	// Get last name of an instructor
+	$scope.lastName = function(name){
+		if (name){
+			var names = name.split(" ");
+			return names[names.length-1];
+		}else{
+			return "Staff";
+		}
+	}
 
 	// Mix the list of selected courses and limit them to a specified amount
 	function scramble(arr){

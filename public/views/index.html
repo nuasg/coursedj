@@ -44,8 +44,7 @@
 		<div class="col-sm-8 col-md-9 col-lg-10 col-right">
 			<div class="alert alert-info" id="info">
 				<strong>Welcome to CourseDJ!</strong>
-				We're rolling out new changes and features as fast as we can, <br>so if you see something that could be improved, shoot us an email! (bottom of the page) <br> 
-			
+				Courses now show their times and instructors!<br>We're also working on discussion and lab sections, but if you have any other feedback, let us know! 
 			</div>
 		</div>
 	</div>
@@ -72,7 +71,7 @@
 					
 				<div ng-show="selectedSubject"><div>Course</div>
 					<span ng-show="!coursesLoaded" class="fa fa-spinner fa-spin"></span>
-					<select ng-hide="!coursesLoaded || isEmptyArray(courses)" ng-model="selectedCourse" ng-options="course.subject + ' ' + course.catalog_num + ': ' + course.title for course in courses"></select>
+					<select ng-hide="!coursesLoaded || isEmptyArray(courses)" ng-model="selectedCourse" ng-options="course.subject + ' ' + course.catalog_num + ': ' + course.title + ' (' + reduceHour(course.start_time) + ' - ' + reduceHour(course.end_time) + ', ' + lastName(course.instructor) + ')' for course in courses"></select>
 					<div ng-show="coursesLoaded && isEmptyArray(courses)">There are no available classes in that subject. Try choosing another subject!</div>
 				</div>
 
@@ -89,7 +88,7 @@
 					<div ng-show="setList">
 						<div class="course" ng-repeat="course in setList">
 							<span class="fa fa-close red" ng-click="removeFromSetList(course)"></span>
-							<strong>{{course.subject}} {{course.catalog_num}}:</strong> {{course.title}}
+							<strong>{{course.subject}} {{course.catalog_num}}:</strong> {{course.title}} ({{reduceHour(course.start_time)}} - {{reduceHour(course.end_time)}}, {{lastName(course.instructor)}})
 							<form name="priority">
 								<input type="radio" ng-model="course.priority" name="priority" ng-value="1" checked="checked" />Optional
 								<input type="radio" ng-model="course.priority" name="priority" ng-value="2" />Preferred
