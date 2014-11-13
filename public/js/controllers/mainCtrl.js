@@ -15,7 +15,7 @@ app.controller('mainController', function($scope, $http, ASG){
 	var colors = ["green", "blue", "purple", "orange", "grey"];
 	
 	// GET a list of subjects 
-	ASG.getSubjects()
+	ASG.getSubjects($scope.term)
 		.success(function(data){
 			console.log("GET");
 			$scope.subjects = data;
