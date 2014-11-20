@@ -66,7 +66,7 @@
 				</select>
 				<div>Subject</div>
 				<div class="subject">
-					<select ng-model="selectedSubject" ng-options="subject.name for subject in subjects" class="selected-sub"></select>
+					<select ng-model="selectedSubject" ng-options="subject.name for subject in subjects | orderBy: 'name'" class="selected-sub"></select>
 				</div>
 					
 				<div ng-show="selectedSubject"><div>Course</div>
@@ -86,7 +86,7 @@
 				</div>
 				<div class="">
 					<div ng-show="setList">
-						<div class="course" ng-repeat="course in setList">
+						<div class="course" ng-repeat="course in setList | orderBy: 'subject'">
 							<span class="fa fa-close red" ng-click="removeFromSetList(course)"></span>
 							<strong>{{course.subject}} {{course.catalog_num}}:</strong> {{course.title}} ({{reduceHour(course.start_time)}} - {{reduceHour(course.end_time)}}, {{lastName(course.instructor)}})
 							<form name="priority">
