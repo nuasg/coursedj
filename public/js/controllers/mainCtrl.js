@@ -117,6 +117,14 @@ app.controller('mainController', function($scope, $http, ASG){
 		}
 	}
 
+	$scope.handleEvent = function(ev){
+		if ($scope.setList.length > 0 && ev.charCode == 13){
+			$scope.remix();
+		}else if(ev.charCode == 13){
+			alert("You haven't chosen any courses yet! Select some classes then try again!")
+		}
+	}
+
 	// Mix the list of selected courses and limit them to a specified amount
 	function scramble(arr){
 		var chosenDates = JSON.parse(JSON.stringify(arr));

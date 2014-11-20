@@ -4,8 +4,8 @@ var app = angular.module('mainService', []);
 
 app.factory('ASG', function($http){
 
-	var NOT_A_KEY = "a3iSOsJ77pgC8BnX";
-	//var NOT_A_KEY = "P2VVnfB0PwGQpdqh";
+	//var NOT_A_KEY = "a3iSOsJ77pgC8BnX";
+	var NOT_A_KEY = "P2VVnfB0PwGQpdqh";
 	return{
 		getSubjects: function(term){
 			return $http.get('http://api.asg.northwestern.edu/subjects/?key=' + NOT_A_KEY+ '&term=' + term);

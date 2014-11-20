@@ -35,7 +35,7 @@
 </head>
 
 <!-- load user data into angular controller -->
-<body ng-controller="mainController">
+<body ng-controller="mainController" ng-keypress="handleEvent($event)">
 	<div class="row header-row" ng-show="loaded">
 		<div class="header col-sm-4 col-md-3 col-lg-2 col-left">
 			<!-- <img src="/img/boxes.ico"> -->
@@ -84,30 +84,28 @@
 				<div class="form-title">
 					Classes Added
 				</div>
-				<div class="">
-					<div ng-show="setList">
-						<div class="course" ng-repeat="course in setList | orderBy: 'subject'">
-							<span class="fa fa-close red" ng-click="removeFromSetList(course)"></span>
-							<strong>{{course.subject}} {{course.catalog_num}}:</strong> {{course.title}} ({{reduceHour(course.start_time)}} - {{reduceHour(course.end_time)}}, {{lastName(course.instructor)}})
-							<form name="priority">
-								<input type="radio" ng-model="course.priority" name="priority" ng-value="1" checked="checked" />Optional
-								<input type="radio" ng-model="course.priority" name="priority" ng-value="2" />Preferred
-								<input type="radio" ng-model="course.priority" name="priority" ng-value="10" />Mandatory
-							</form>
-						</div>
-					</div>
-					<div class="class-count">
-						<form name="count" ng-show="setList[0]">
-							<div>Chosen Classes:</div>
-							<input type="radio" ng-model="courseCount" name="count" ng-value="3" checked="checked" />3
-							<input type="radio" ng-model="courseCount" name="count" ng-value="4" />4
-							<input type="radio" ng-model="courseCount" name="count" ng-value="5" />5
+				<div ng-show="setList">
+					<div class="course" ng-repeat="course in setList | orderBy: 'subject'">
+						<span class="fa fa-close red" ng-click="removeFromSetList(course)"></span>
+						<strong>{{course.subject}} {{course.catalog_num}}:</strong> {{course.title}} ({{reduceHour(course.start_time)}} - {{reduceHour(course.end_time)}}, {{lastName(course.instructor)}})
+						<form name="priority">
+							<input type="radio" ng-model="course.priority" name="priority" ng-value="1" checked="checked" />Optional
+							<input type="radio" ng-model="course.priority" name="priority" ng-value="2" />Preferred
+							<input type="radio" ng-model="course.priority" name="priority" ng-value="10" />Mandatory
 						</form>
 					</div>
+				</div>
+				<div class="class-count">
+					<form name="count" ng-show="setList[0]">
+						<div>Chosen Classes:</div>
+						<input type="radio" ng-model="courseCount" name="count" ng-value="3" checked="checked" />3
+						<input type="radio" ng-model="courseCount" name="count" ng-value="4" />4
+						<input type="radio" ng-model="courseCount" name="count" ng-value="5" />5
+					</form>
+				</div>
 
 				<button ng-show="setList[0]" ng-click="remix()">Remix!</button>
 
-				</div>
 			</div>
 		</div> <!-- Class Selection Column -->
 
