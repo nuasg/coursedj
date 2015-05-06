@@ -7,13 +7,13 @@ var app = angular.module('mainController', []);
 app.controller('mainController', function($scope, $http, ASG){
 	$scope.loaded = false;
 	$scope.coursesLoaded = true;
-	$scope.term = 4570;
+	$scope.term = 4600;
 	$scope.setList = [];
 	$scope.events = [];
 	$scope.courseCount = 4;
 	$scope.conflict = false;
 	var colors = ["green", "blue", "purple", "orange", "grey"];
-	
+
 	// GET a list of subjects 
 	ASG.getSubjects($scope.term)
 		.success(function(data){
