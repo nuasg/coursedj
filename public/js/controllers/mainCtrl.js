@@ -14,7 +14,7 @@ app.controller('mainController', function($scope, $http, ASG){
 	$scope.conflict = false;
 	var colors = ["green", "blue", "purple", "orange", "grey"];
 
-	// GET a list of subjects 
+	// GET a list of subjects
 	ASG.getSubjects($scope.term)
 		.success(function(data){
 			console.log("GET");
@@ -80,7 +80,7 @@ app.controller('mainController', function($scope, $http, ASG){
 			var title = chosenDates[i].subject + " " + chosenDates[i].catalog_num
 			var days = parseDays(chosenDates[i].meeting_days);
 			var clr = colors[i];
-			for (var j=0; j<days.length; j++){				
+			for (var j=0; j<days.length; j++){
 				$scope.events.push({
 					text: title,
 					start_date: makeDate(days[j], chosenDates[i].start_time),
@@ -118,10 +118,9 @@ app.controller('mainController', function($scope, $http, ASG){
 	}
 
 	$scope.handleEvent = function(ev){
-		if ($scope.setList.length > 0 && ev.charCode == 13){
+		// User presses ENTER KEY - keyboard shortcut to REMIX
+		if (ev.charCode == 13 && $scope.setList.length > 0) {
 			$scope.remix();
-		}else if(ev.charCode == 13){
-			alert("You haven't chosen any courses yet! Select some classes then try again!")
 		}
 	}
 
@@ -209,9 +208,9 @@ app.controller('mainController', function($scope, $http, ASG){
   			return new Date(2014, 03, 25, hour, min);
 			case "Sa":
   			return new Date(2014, 03, 26, hour, min);
-			default: 
+			default:
 				return new Date(2014, 03, 20, 00, 00);
-  	} 
+  	}
   }
 
   // Calculate if two courses conflict
