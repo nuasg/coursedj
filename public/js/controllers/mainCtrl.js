@@ -26,6 +26,10 @@ app.controller('mainController', function($scope, $http, ASG){
 			$scope.loaded = true;
 		});
 
+	$scope.search = function() {
+		console.log("GET request made now")
+	}
+
 	// When a subject is selected, GET all the courses for that given subject
 	$scope.$watch('selectedSubject', function(){
 		$scope.selectedCourse = false;

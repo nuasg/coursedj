@@ -61,6 +61,8 @@
 
 <!-- load user data into angular controller -->
 <body ng-controller="mainController" ng-keypress="handleEvent($event)">
+
+	<!-- HEADER -->
 	<div class="row header-row" ng-show="loaded">
 		<div class="header col-sm-4 col-md-3 col-lg-2 col-left">
 			<!-- <img src="/img/boxes.ico"> -->
@@ -74,6 +76,7 @@
 		</div>
 	</div>
 
+	<!-- BODY -->
 	<div class="row" id="body" ng-show="loaded">
 
 		<!-- Class Selection Column -->
@@ -103,6 +106,13 @@
 				<div class="selected-course" ng-show="selectedCourse">{{selectedCourse.subject}} {{selectedCourse.catalog_num}}: {{selectedCourse.title}}</div>
 				<button class="add" ng-show="selectedCourse" ng-click="addToSetList(selectedCourse)">Add!</button>
 
+				<form>
+					Search (ex. ECON 310-2):<br>
+					<input type="text"
+						   ng-model="course_query"
+						   ng-change="search()"
+						   ng-model-options="{ debounce: 500 }" />
+				</form>
 			</div>
 
 			<div class="class-add">
