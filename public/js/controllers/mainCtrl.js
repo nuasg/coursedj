@@ -27,7 +27,31 @@ app.controller('mainController', function($scope, $http, ASG){
 		});
 
 	$scope.search = function() {
-		console.log("GET request made now")
+		$scope.query = $scope.query.toUpperCase();
+		query_split = $scope.query.split(" ")
+
+		// User has only typed the subject field
+		if (query_split.length == 1) {
+			query_subject = query_split[0]
+			autocorrect = []
+
+			for (subject in $scope.subjects) {
+				abbr = $scope.subjects[subject].symbol
+
+				if (abbr === query_subject) {
+					console.log("perfect match");
+					autocorrect = [abbr];
+					break;
+				} else if (abbr.substring(0, query_subject.length) == query_subject) {
+					console.log(abbr + " begins with " + query_subject);
+					autocorrect.push(abbr);
+				}
+
+			}
+
+			console.log(autocorrect);
+		}
+
 	}
 
 	// When a subject is selected, GET all the courses for that given subject
