@@ -27,31 +27,55 @@ app.controller('mainController', function($scope, $http, ASG){
 		});
 
 	$scope.search = function() {
-		$scope.query = $scope.query.toUpperCase();
-		query_split = $scope.query.split(" ")
+		query_tokenized = $scope.query.split(" ");
+		subject = query_tokenized[0].toUpperCase();
+		catalog_num = query_tokenized[1];
 
-		// User has only typed the subject field
-		if (query_split.length == 1) {
-			query_subject = query_split[0]
-			autocorrect = []
+		if (subject !== "") {
+			subject = subjectSearch(subject);
+			ASG.getCourses($scope.term, subject)
+				.success(function (data) {
+					// transform the results to group the same courses together
+					results = {};
+					for (index in data) {
+						object = data[index];
+						key = object.subject + " " + object.catalog_num;
 
-			for (subject in $scope.subjects) {
-				abbr = $scope.subjects[subject].symbol
+						if (!catalog_num ||
+							object.catalog_num.substring(0, catalog_num.length) === catalog_num) {
+							if (key in results) {
+								results[key].push(object);
+							} else {
+								results[key] = [object];
+							}
+						}
+						if (Object.keys(results).length == 7) {
+							break;
+						}
+					}
+					$scope.autocorrect = results;
+					console.log(results);
 
-				if (abbr === query_subject) {
-					console.log("perfect match");
-					autocorrect = [abbr];
-					break;
-				} else if (abbr.substring(0, query_subject.length) == query_subject) {
-					console.log(abbr + " begins with " + query_subject);
-					autocorrect.push(abbr);
-				}
-
-			}
-
-			console.log(autocorrect);
+				})
+				.error(function (err) {
+					console.log(err);
+				})
+		} else {
+			$scope.autocorrect = [];
 		}
 
+	}
+
+	// Given a subject query (e.g. EEC), returns the first one (alphabetical)
+	function subjectSearch(query) {
+		for (index in $scope.subjects) {
+			symbol = $scope.subjects[index].symbol
+			// If a symbol begins with the query (e.g. EE for EECS)
+			if (symbol.substring(0, query.length) === query) {
+				return symbol;
+			}
+		}
+		return null;
 	}
 
 	// When a subject is selected, GET all the courses for that given subject
@@ -131,7 +155,7 @@ app.controller('mainController', function($scope, $http, ASG){
 			var newStr = hour.toString() + str.substring(2, 5);
 			return newStr;
 		}else{
-			return 'n/a'
+			return 'n/a';
 		}
 	}
 

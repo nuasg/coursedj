@@ -107,12 +107,25 @@
 				<button class="add" ng-show="selectedCourse" ng-click="addToSetList(selectedCourse)">Add!</button>
 
 				<form>
-					Search (ex. ECON 310-2):<br>
+					<label>Search (ex. ECON 310-2):</label>
 					<input type="text"
+						   id="search-box"
 						   ng-model="query"
 						   ng-change="search()"
-						   ng-model-options="{ debounce: 500 }" />
+						   ng-model-options="{ debounce: 500 }"/>
+
 				</form>
+				<nav id="primary_nav_wrap">
+					<ul>
+						<li>
+							<ul>
+								<li ng-repeat="course in autocorrect | limitTo: 5">
+									<a href="#">{{course[0].subject + ' ' + course[0].catalog_num + ' - ' + course[0].title}}</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
 			</div>
 
 			<div class="class-add">
