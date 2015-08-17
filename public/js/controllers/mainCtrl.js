@@ -23,10 +23,12 @@ app.controller('mainController', function($scope, $http, ASG){
 		})
 		.error(function(err) {
 			console.log(err);
-			// $scope.loaded = false;
+			$scope.subjects = [{ symbol: 'ERR', name: 'Unable to load courses' }];
+			$scope.loaded = true;
 		});
 
 	// When a subject is selected, GET all the courses for that given subject
+	// Group subjects with the same number together
 	$scope.$watch('selectedSubject', function(){
 		$scope.selectedCourse = false;
 		if ($scope.loaded){
