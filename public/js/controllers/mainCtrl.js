@@ -62,6 +62,9 @@ app.controller('mainController', function($scope, $http, ASG){
 		if (i !== false){
 			$scope.setList.splice(i, 1);
 		}
+		if (course.id === $scope.selectedCourse.id) {
+			$scope.selectedCourse = false;
+		}
 	};
 
 	// Check if an array is empty
