@@ -17,13 +17,13 @@ app.controller('mainController', function($scope, $http, ASG){
 	// GET a list of subjects 
 	ASG.getSubjects($scope.term)
 		.success(function(data){
-			console.log("GET");
+			console.log("Subjects GET");
 			$scope.subjects = data;
 			$scope.loaded = true;
 		})
 		.error(function(err){
 			console.log(err);
-			$scope.loaded = true;
+			// $scope.loaded = false;
 		});
 
 	// When a subject is selected, GET all the courses for that given subject
