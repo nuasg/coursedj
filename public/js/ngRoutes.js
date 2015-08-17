@@ -7,7 +7,7 @@
 		.when('/', {
 			templateUrl: 'views/main.html',
 			//controller: 'galleryController',
-		})
+		});
 
 		/*
 		.when('/404', {

@@ -14,14 +14,14 @@ app.controller('mainController', function($scope, $http, ASG){
 	$scope.conflict = false;
 	var colors = ["green", "blue", "purple", "orange", "grey"];
 
-	// GET a list of subjects 
+	// GET subjects from API
 	ASG.getSubjects($scope.term)
-		.success(function(data){
+		.success(function(data) {
 			console.log("Subjects GET");
 			$scope.subjects = data;
 			$scope.loaded = true;
 		})
-		.error(function(err){
+		.error(function(err) {
 			console.log(err);
 			// $scope.loaded = false;
 		});
@@ -66,7 +66,7 @@ app.controller('mainController', function($scope, $http, ASG){
 
 	// Check if an array is empty
 	$scope.isEmptyArray = function(arr){
-		return (arr == undefined || arr.length < 1);
+		return (arr === undefined || arr.length < 1);
 	};
 
 	// Process the selected courses and display the results
@@ -77,7 +77,7 @@ app.controller('mainController', function($scope, $http, ASG){
 		var chosenDates = scramble($scope.setList);
 
 		for (var i=0; i<chosenDates.length; i++){
-			var title = chosenDates[i].subject + " " + chosenDates[i].catalog_num
+			var title = chosenDates[i].subject + " " + chosenDates[i].catalog_num;
 			var days = parseDays(chosenDates[i].meeting_days);
 			var clr = colors[i];
 			for (var j=0; j<days.length; j++){				
@@ -95,17 +95,17 @@ app.controller('mainController', function($scope, $http, ASG){
 	};
 
 	// Chance 24-hour times to 12-hour format
-	$scope.reduceHour = function(str){
-		if (str != null){
+	$scope.reduceHour = function(str) {
+		if (str !== null) {
 			var hour = parseInt(str.substring(0, 2), 10);
 			if (hour > 12)
 				hour -= 12;
 			var newStr = hour.toString() + str.substring(2, 5);
 			return newStr;
-		}else{
-			return 'n/a'
+		} else {
+			return 'n/a';
 		}
-	}
+	};
 
 	// Get last name of an instructor
 	$scope.lastName = function(name){
@@ -115,15 +115,15 @@ app.controller('mainController', function($scope, $http, ASG){
 		}else{
 			return "Staff";
 		}
-	}
+	};
 
 	$scope.handleEvent = function(ev){
-		if ($scope.setList.length > 0 && ev.charCode == 13){
+		if ($scope.setList.length > 0 && ev.charCode == 13) {
 			$scope.remix();
-		}else if(ev.charCode == 13){
-			alert("You haven't chosen any courses yet! Select some classes then try again!")
+		} else if(ev.charCode == 13) {
+			alert("You haven't chosen any courses yet! Select some classes then try again!");
 		}
-	}
+	};
 
 	// Mix the list of selected courses and limit them to a specified amount
 	function scramble(arr){
@@ -137,7 +137,7 @@ app.controller('mainController', function($scope, $http, ASG){
 				mandatoryCourses.push(chosenDates[i]);
 			}
 		}
-		chosenDates.sort(function(a, b){return b.priority - a.priority});
+		chosenDates.sort(function(a, b){return b.priority - a.priority;});
 		chosenDates = chosenDates.slice(0, $scope.courseCount);
 
 		for (var i=0; i<mandatoryCourses.length; i++){
@@ -156,7 +156,7 @@ app.controller('mainController', function($scope, $http, ASG){
 	// take a string "MoWeFr" and returns an array of the dates ["Mo", "We", "Fr"]
   function parseDays(str){
   	var days = [];
-  	if (str != null){
+  	if (str !== null){
 	  	var length = str.length;
 	  	for (var i=0; i<str.length; i+=2){
 	  		days.push(str.substring(i, i+2));
@@ -224,7 +224,7 @@ app.controller('mainController', function($scope, $http, ASG){
 
   // Checks if a given course has specific fields defined or not
   function hasFullInfo(course){
-  	if (course.meeting_days == null || course.start_time == null || course.end_time == null){
+  	if (course.meeting_days === null || course.start_time === null || course.end_time === null){
   		course.incompleteInfo = true;
   		alert("Careful! The course you just added has incomplete information from the registrar and will be unable to be displayed. You may want to remove this course from your Classes Added to not throw off your results.");
   	}
