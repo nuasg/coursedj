@@ -67,6 +67,13 @@ body{
 .class-pick select{
   max-width: 100%;
 }
+.fa-close:hover {
+  /* yes, darkgray is lighter than gray. don't ask me why */
+  background-color: darkgray;   
+}
+.fa-close:active {
+  background-color: gray;
+}
 .red{
   color:#ff0000;
 }
