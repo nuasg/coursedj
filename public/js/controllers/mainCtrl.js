@@ -28,18 +28,17 @@ app.controller('mainController', function($scope, $http, ASG){
 		});
 
 	// When a subject is selected, GET all the courses for that given subject
-	// Group subjects with the same number together
-	$scope.$watch('selectedSubject', function(){
+	$scope.$watch('selectedSubject', function() {
 		$scope.selectedCourse = false;
-		if ($scope.loaded){
+		if ($scope.selectedSubject && $scope.selectedSubject.symbol !== 'ERR') {
 			$scope.coursesLoaded = false;
 			ASG.getCourses($scope.term, $scope.selectedSubject.symbol)
-			.success(function(data){
-				console.log("GET");
+			.success(function(data) {
+				console.log("Courses GET");
 				$scope.courses = data;
 				$scope.coursesLoaded = true;
 			})
-			.error(function(err){
+			.error(function(err) {
 				console.log(err);
 				$scope.courses = [];
 				$scope.coursesLoaded = true;
@@ -55,7 +54,6 @@ app.controller('mainController', function($scope, $http, ASG){
 			hasFullInfo(course);
 			$scope.setList.push(course);
 		}
-		$scope.selectedCourse = false;
 	};
 
 	// Remove a course from the list of selected courses

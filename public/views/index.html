@@ -96,12 +96,12 @@
 
 				<div ng-show="selectedSubject"><div>Course</div>
 					<span ng-show="!coursesLoaded" class="fa fa-spinner fa-spin"></span>
-					<select ng-hide="!coursesLoaded || isEmptyArray(courses)" ng-model="selectedCourse" ng-options="course.subject + ' ' + course.catalog_num + ': ' + course.title + ' (' + reduceHour(course.start_time) + ' - ' + reduceHour(course.end_time) + ', ' + lastName(course.instructor) + ')' for course in courses"></select>
+					<select ng-hide="!coursesLoaded || isEmptyArray(courses)" ng-model="selectedCourse"
+							ng-options="course.subject + ' ' + course.catalog_num + ': ' + course.title + ' (' + reduceHour(course.start_time) + ' - ' + reduceHour(course.end_time) + ', ' + lastName(course.instructor) + ')' for course in courses"
+							ng-change="addToSetList(selectedCourse)">
+					</select>
 					<div ng-show="coursesLoaded && isEmptyArray(courses)">There are no available classes in that subject. Try choosing another subject!</div>
 				</div>
-
-				<div class="selected-course" ng-show="selectedCourse">{{selectedCourse.subject}} {{selectedCourse.catalog_num}}: {{selectedCourse.title}}</div>
-				<button class="add" ng-show="selectedCourse" ng-click="addToSetList(selectedCourse)">Add!</button>
 
 			</div>
 
