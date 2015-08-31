@@ -50,12 +50,15 @@ body{
   height: calc(100% - 6em);
 }
 #cal-body{
+  /*border: none;*/
+  border-radius: 0px;
+  
   height: calc(100% - 70px);
   margin: 0;
   
-  -webkit-box-shadow: 1px 1px 3px 0px rgba(168,168,168,1);
-  -moz-box-shadow: 1px 1px 3px 0px rgba(168,168,168,1);
-  box-shadow: 1px 1px 3px 0px rgba(168,168,168,1);
+  -webkit-box-shadow: 2px 2px 3px 0px rgba(168,168,168,1);
+  -moz-box-shadow: 2px 2px 3px 0px rgba(168,168,168,1);
+  box-shadow: 2px 2px 3px 0px rgba(168,168,168,1);
 }
 #cal{
   height: 100%;
