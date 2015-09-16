@@ -1,14 +1,13 @@
 {
   "name": "CourseDJ",
-  "version": "1.0.0",
-  "description": "Course Scheduling Aide",
+  "version": "1.1.0",
+  "description": "A course schedule generator and assistant for Northwestern students",
   "main": "server.js",
-  "author": "Thomas Huang",
+  "author": "ASG Services",
   "dependencies": {
-    "body-parser": "~1.14.0",
-    "ejs": "~2.3.4",
-    "express": "~4.13.3",
-    "method-override": "~2.3.5",
-    "morgan": "~1.6.1"
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "morgan": "^1.6.1",
+    "path": "^0.12.7"
   }
 }

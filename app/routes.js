@@ -1,14 +1,12 @@
 // app/routes.js
 
-module.exports = function(app){
+module.exports = function(app) {
 
-//// VIEWS -------------------------------------------------------------------
+//// VIEWS ---------------------------------------------------------------------
 	// home page
 	app.get('/', function(req, res) {
 		res.render('index.html', {
-			user : req.user
+			// user : req.user
 		});
 	});
-
 };
-

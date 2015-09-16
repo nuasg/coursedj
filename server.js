@@ -1,29 +1,23 @@
 // server.js
 
-// set up ======================================================================
-var express 		= require('express');
-var app 		= express(); 			// create app w/ express
-var port 		= process.env.PORT || 5000; 	// set port
+// set up
+var express = require('express');
+var app = express();
+var port = process.env.PORT || 5000;
 
 // express modules
-var morgan 		= require('morgan');
-var bodyParser 		= require('body-parser');
-var methodOverride 	= require('method-override');
+var path = require('path');
+var morgan = require('morgan');
 
 // express config
-app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
-app.use(morgan('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(methodOverride());
-app.engine('html', require('ejs').renderFile);
+app.use(express.static(path.join(__dirname, '/public')));     // static files location (e.g. /public/img will be /img for users)
+app.set('views', path.join(__dirname, '/public/views'));
 app.set('view engine', 'html');
-//app.set('view engine', 'ejs');
-app.set('views', __dirname + '/public/views');
+app.engine('html', require('ejs').renderFile);
+app.use(morgan('dev'));
 
-// routes ======================================================================
+// routing
 require('./app/routes.js')(app);
 
-// listen (start app with node server.js) ======================================
 app.listen(port);
-console.log("App listening on port " + port);
+console.log("APP LISTENING: PORT " + port);
