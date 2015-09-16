@@ -1,0 +1,138 @@
+/* GLOBAL SASS */
+*
+  font-family: "Roboto", sans-serif
+  
+html, body
+  height: 100%
+
+
+/* VARIABLES AND MIXINS */
+$accent: #1144AA
+$logo-color: #FFFFFF
+$header-bg-color: #585E69
+$sidebar-bg-color: #585E69
+$calendar-bg-color: #f2f2f2
+
+=box-shadow()
+  $shadow-color: rgba(168,168,168,1)
+  -webkit-box-shadow: 2px 2px 3px 0px $shadow-color
+  -moz-box-shadow:    2px 2px 3px 0px $shadow-color
+  box-shadow:         2px 2px 3px 0px $shadow-color
+
+
+/* HEADER */
+.header-row
+  background-color: $header-bg-color
+  height: 6em
+  
+  .header-left
+    height: 100%
+    padding-top: 1.5em
+    background-color: $accent
+    text-align: center
+    z-index: 3
+    
+    .title
+      font-family: "Orbitron", sans-serif
+      font-size: 2.5em
+      color: $logo-color
+  
+  .header-right
+    height: 100%
+    z-index: 2
+    +box-shadow()
+    
+    #info
+      display: inline-block
+      margin-top: 15px
+      padding: 5px
+
+
+/* MAIN BODY */
+.body-row
+  height: calc(100% - 6em)
+  
+  .body-left
+    height: 100%
+    padding-left: 0px
+    padding-right: 0px
+    background-color: $sidebar-bg-color
+    z-index: 2
+    font-size: 0.9em
+    +box-shadow()
+    
+    .form-title
+      font-size: 1.4em
+      
+    .class-add
+      color: white
+      margin: 0 1em 1em 1em
+      padding-bottom: 1em
+      
+      .course
+        border-bottom: 2px solid $accent
+        margin-top: 3px
+        padding-bottom: 3px
+      
+      select, button
+        color: #222222
+
+    .class-pick
+      border-bottom: 2px solid $accent
+      padding-top: 1em
+      
+      select
+        max-width: 100%
+      
+    .class-count
+      margin-bottom: 20px
+      margin-top: 20px
+    
+  .body-right
+    height: 100%
+    background-color: $calendar-bg-color
+    padding: 15px
+    
+    #cal-container
+      border-radius: 0px
+      height: calc(100% - 70px)
+      margin: 0
+      +box-shadow()
+      
+      .panel-body
+        height: 100%
+        
+    .footer
+      margin-top: 10px
+      text-align: center
+      
+      a
+        color: #4DB5B9
+        &:hover
+          color: #222222
+          text-decoration: none
+      p
+        color: #AAAAAA
+
+
+/* CALENDAR */
+.dhx_cal_container
+  height: 100%
+
+.dhx_cal_navline
+  display: none
+
+.dhx_cal_header, .dhx_cal_data
+  margin-top: -25px
+
+
+/* //// BOOTSTRAP OVERRIDES //// */
+.row
+  margin: 0 !important
+
+
+/* MISC */
+.red
+  color: #ff0000
+.green
+  color: #66CD00

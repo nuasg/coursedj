@@ -55,5 +55,5 @@ app.directive('dhxScheduler', function() {
       // init scheduler
       scheduler.init($element[0], $scope.scheduler.date, $scope.scheduler.mode);
     }
-  }
+  };
 });

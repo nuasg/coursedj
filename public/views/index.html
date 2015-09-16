@@ -8,7 +8,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>CourseDJ</title>
+	<title>ASG Services | CourseDJ</title>
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="/css/main.css">
@@ -17,7 +17,7 @@
 
 	<!-- Angular, Fonts, and Icons -->
 	<script src="/resources/angular.min.js"></script>
-	<link rel="shortcut icon" href="/img/boxes.ico">
+	<link rel="shortcut icon" href="/img/favicon.ico">
   	<link href='http://fonts.googleapis.com/css?family=Roboto|Orbitron:500' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
 
@@ -63,22 +63,24 @@
 <!-- load user data into angular controller -->
 <body ng-controller="mainController" ng-keypress="handleEvent($event)">
 	<div class="row header-row" ng-show="loaded">
-		<div class="header col-sm-4 col-md-3 col-lg-2 col-left">
-			<!-- <img src="/img/boxes.ico"> -->
+		
+		<div class="header-left col-left col-sm-4 col-md-3 col-lg-2">
 			<span class="title">CourseDJ</span>
 		</div>
-		<div class="col-sm-8 col-md-9 col-lg-10 col-right">
+		
+		<div class="header-right col-right col-sm-8 col-md-9 col-lg-10">
 			<div class="alert alert-info" id="info">
 				<strong>Welcome to CourseDJ!</strong>
 				Courses now show their times and instructors!<br>We're also working on discussion and lab sections, but if you have any other feedback, let us know!
 			</div>
 		</div>
+		
 	</div>
 
-	<div class="row" id="body" ng-show="loaded">
+	<div class="row body-row" id="body" ng-show="loaded">
 
 		<!-- Class Selection Column -->
-		<div class="col-sm-4 col-md-3 col-lg-2 col-left" id="form">
+		<div class="body-left col-left col-sm-4 col-md-3 col-lg-2" id="form">
 			<div class="class-add class-pick">
 				<div class="form-title">
 					Pick Your Classes
@@ -101,7 +103,7 @@
 					<div ng-show="coursesLoaded && isEmptyArray(courses)">There are no available classes in that subject. Try choosing another subject!</div>
 				</div>
 
-				<div class="selected-course" ng-show="selectedCourse">{{selectedCourse.subject}} {{selectedCourse.catalog_num}}: {{selectedCourse.title}}</div>
+				<div class="selected-course green" ng-show="selectedCourse">{{selectedCourse.subject}} {{selectedCourse.catalog_num}}: {{selectedCourse.title}}</div>
 				<button class="add" ng-show="selectedCourse" ng-click="addToSetList(selectedCourse)">Add!</button>
 
 			</div>
@@ -136,8 +138,8 @@
 		</div> <!-- Class Selection Column -->
 
 		<!-- Calendar Column -->
-		<div class="col-sm-8 col-md-9 col-lg-10 col-right" id="cal">
-			<div class="panel panel-default panel-full" id="cal-body">
+		<div class="body-right col-right col-sm-8 col-md-9 col-lg-10" id="cal">
+			<div class="panel panel-default panel-full" id="cal-container">
 				<div class="panel-body panel-full">
 					<div dhx-scheduler data="events">
 		        <div class="dhx_cal_date"></div>
