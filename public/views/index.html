@@ -70,8 +70,9 @@
 		
 		<div class="header-right col-right col-sm-8 col-md-9 col-lg-10">
 			<div class="alert alert-info" id="info">
-				<strong>Welcome to CourseDJ!</strong>
-				Courses now show their times and instructors!<br>We're also working on discussion and lab sections, but if you have any other feedback, let us know!
+				<strong>Welcome Class of 2019!</strong>
+				We're currently working on combining classes with multiple sections, so stay tuned.<br>
+				Feedback? Questions? Concerns? Shoot us an email with the link below.
 			</div>
 		</div>
 		
@@ -94,17 +95,19 @@
 				</select>
 				<div>Subject</div>
 				<div class="subject">
-					<select ng-model="selectedSubject" ng-options="subject.name for subject in subjects | orderBy: 'name'" class="selected-sub"></select>
+					<select ng-model="selectedSubject" ng-options="subject.symbol + ' - ' + subject.name for subject in subjects | orderBy: 'symbol'" class="selected-sub"></select>
 				</div>
 
 				<div ng-show="selectedSubject"><div>Course</div>
 					<span ng-show="!coursesLoaded" class="fa fa-spinner fa-spin"></span>
-					<select ng-hide="!coursesLoaded || isEmptyArray(courses)" ng-model="selectedCourse" ng-options="course.subject + ' ' + course.catalog_num + ': ' + course.title + ' (' + reduceHour(course.start_time) + ' - ' + reduceHour(course.end_time) + ', ' + lastName(course.instructor) + ')' for course in courses"></select>
+					<select ng-change="addToSetList()" ng-hide="!coursesLoaded || isEmptyArray(courses)" ng-model="selectedCourse"
+									ng-options="course.catalog_num + ': ' + courseName(course) + ' (' + course.meeting_days + ' ' + reduceHour(course.start_time) + ' - ' + reduceHour(course.end_time) + ', ' + lastName(course.instructor) + ')' for course in courses | orderBy: 'catalog_num'">
+					</select>
 					<div ng-show="coursesLoaded && isEmptyArray(courses)">There are no available classes in that subject. Try choosing another subject!</div>
 				</div>
 
-				<div class="selected-course green" ng-show="selectedCourse">{{selectedCourse.subject}} {{selectedCourse.catalog_num}}: {{selectedCourse.title}}</div>
-				<button class="add" ng-show="selectedCourse" ng-click="addToSetList(selectedCourse)">Add!</button>
+				<!-- <div class="selected-course green" ng-show="selectedCourse">{{selectedCourse.subject}} {{selectedCourse.catalog_num}}: {{selectedCourse.title}}</div>
+				<button class="add" ng-show="selectedCourse" ng-click="">Add!</button> -->
 
 			</div>
 

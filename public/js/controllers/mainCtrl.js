@@ -46,7 +46,8 @@ app.controller('mainController', function($scope, $http, ASG){
 	});
 
 	// Add a course to the list of selected courses
-	$scope.addToSetList = function(course){
+	$scope.addToSetList = function(){
+		var course = $scope.selectedCourse;
 		var i = arrayContains($scope.setList, course);
 		if (i === false){
 			course.priority = 1;
@@ -67,6 +68,15 @@ app.controller('mainController', function($scope, $http, ASG){
 	// Check if an array is empty
 	$scope.isEmptyArray = function(arr){
 		return (arr === undefined || arr.length < 1);
+	};
+	
+	// Special handling for classes such as 395 and 495
+	$scope.courseName = function(course) {
+		if (course.topic) {
+			return course.topic;
+		} else {
+			return course.title;
+		}
 	};
 
 	// Process the selected courses and display the results
