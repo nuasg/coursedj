@@ -8,25 +8,24 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>ASG Services | CourseDJ</title>
+	<title>CourseDJ | ASG Services</title>
 
 	<!-- CSS -->
-	<link rel="stylesheet" href="/css/main.css">
 	<link rel="stylesheet" href="/resources/bootstrap.min.css">
 	<link rel="stylesheet" href="/resources/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/main.css">
 
-	<!-- Angular, Fonts, and Icons -->
-	<script src="/resources/angular.min.js"></script>
+	<!-- Fonts and Icons -->
 	<link rel="shortcut icon" href="/img/favicon.ico">
-  	<link href='http://fonts.googleapis.com/css?family=Roboto|Orbitron:500' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Roboto|Orbitron:500' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
 
 	<!-- Imported Resources -->
+	<script src="/resources/angular.min.js"></script>
 	<script src="/resources/jquery-2.1.1.min.js"></script>
 	<script src="/resources/bootstrap.min.js"></script>
 	<script src="/resources/calendar-codebase/dhtmlxscheduler.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="/resources/calendar-codebase/dhtmlxscheduler.css" type="text/css">
-	<!-- <link rel="stylesheet" href="/resources/calendar-codebase/dhtmlxscheduler_flat.css" type="text/css"> -->
 
 	<!-- Angular Custom Components -->
 	<script src="/js/coreModule.js"></script>
@@ -70,9 +69,11 @@
 		
 		<div class="header-right col-right col-sm-8 col-md-9 col-lg-10">
 			<div class="alert alert-info" id="info">
-				<strong>Welcome Class of 2019!</strong>
-				We're currently working on combining classes with multiple sections, so stay tuned.<br>
-				Feedback? Questions? Concerns? Shoot us an email with the link below.
+				<b>Welcome Class of 2019!</b> If you liked CourseDJ, check out our other sites: </br>
+				<a href="http://services.asg.northwestern.edu/" target="_blank">ASG Services Website</a> | 
+				<a href="http://studyabroad.asg.northwestern.edu/" target="_blank">Unofficial Study Abroad Guide</a> | 
+				<b>CourseDJ</b> | 
+				<a href="https://asg.northwestern.edu/redesignu/" target="_blank">RedesigNU</a>
 			</div>
 		</div>
 		
@@ -118,7 +119,7 @@
 				<div ng-show="setList">
 					<div class="course" ng-repeat="course in setList | orderBy: 'subject'">
 						<span class="fa fa-close red" ng-click="removeFromSetList(course)"></span>
-						<strong>{{course.subject}} {{course.catalog_num}}:</strong> {{course.title}} ({{reduceHour(course.start_time)}} - {{reduceHour(course.end_time)}}, {{lastName(course.instructor)}})
+						<strong>{{course.subject}} {{course.catalog_num}}:</strong> {{courseName(course)}} ({{course.meeting_days}} {{reduceHour(course.start_time)}} - {{reduceHour(course.end_time)}}, {{lastName(course.instructor)}})
 						<form name="priority">
 							<input type="radio" ng-model="course.priority" name="priority" ng-value="1" checked="checked" />Optional
 							<input type="radio" ng-model="course.priority" name="priority" ng-value="2" />Preferred
