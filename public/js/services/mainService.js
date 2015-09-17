@@ -4,7 +4,7 @@ var app = angular.module('mainService', []);
 
 app.factory('ASG', function($http){
 
-	var NOT_A_KEY = "a3iSOsJ77pgC8BnX"; //LIVE
+	var NOT_A_KEY = "aSjUsc00dvwfNZ9E"; //LIVE
 	// var NOT_A_KEY = "P2VVnfB0PwGQpdqh"; //DEBUG
 	return{
 		getSubjects: function(term){
