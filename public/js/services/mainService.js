@@ -2,10 +2,12 @@
 
 var app = angular.module('mainService', []);
 
-app.factory('ASG', function($http){
-
-	var NOT_A_KEY = "aSjUsc00dvwfNZ9E"; //LIVE
-	// var NOT_A_KEY = "P2VVnfB0PwGQpdqh"; //DEBUG
+app.factory('ASG', function($http, $location){
+	if ($location.$$host === 'localhost') {
+		var NOT_A_KEY = "P2VVnfB0PwGQpdqh"; //DEBUG
+	} else {
+		var NOT_A_KEY = "aSjUsc00dvwfNZ9E"; //LIVE
+	}
 	return{
 		getSubjects: function(term){
 			return $http.get('http://api.asg.northwestern.edu/subjects/?key=' + NOT_A_KEY+ '&term=' + term);

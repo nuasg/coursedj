@@ -7,14 +7,14 @@ var app = angular.module('mainController', []);
 app.controller('mainController', function($scope, $http, ASG){
 	$scope.loaded = false;
 	$scope.coursesLoaded = true;
-	$scope.term = 4600;
+	$scope.term = 4610;
 	$scope.setList = [];
 	$scope.events = [];
 	$scope.courseCount = 4;
 	$scope.conflict = false;
 	var colors = ["green", "blue", "purple", "orange", "grey"];
 
-	// GET a list of subjects 
+	// GET a list of subjects
 	ASG.getSubjects($scope.term)
 		.success(function(data){
 			console.log("GET");
@@ -69,7 +69,7 @@ app.controller('mainController', function($scope, $http, ASG){
 	$scope.isEmptyArray = function(arr){
 		return (arr === undefined || arr.length < 1);
 	};
-	
+
 	// Special handling for classes such as 395 and 495
 	$scope.courseName = function(course) {
 		if (course.topic) {
@@ -90,7 +90,7 @@ app.controller('mainController', function($scope, $http, ASG){
 			var title = chosenDates[i].subject + " " + chosenDates[i].catalog_num;
 			var days = parseDays(chosenDates[i].meeting_days);
 			var clr = colors[i];
-			for (var j=0; j<days.length; j++){				
+			for (var j=0; j<days.length; j++){
 				$scope.events.push({
 					text: title,
 					start_date: makeDate(days[j], chosenDates[i].start_time),
@@ -219,9 +219,9 @@ app.controller('mainController', function($scope, $http, ASG){
   			return new Date(2014, 03, 25, hour, min);
 			case "Sa":
   			return new Date(2014, 03, 26, hour, min);
-			default: 
+			default:
 				return new Date(2014, 03, 20, 0, 0);
-  	} 
+  	}
   }
 
   // Calculate if two courses conflict
