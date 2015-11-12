@@ -101,9 +101,11 @@
 
 				<div ng-show="selectedSubject"><div>Course</div>
 					<span ng-show="!coursesLoaded" class="fa fa-spinner fa-spin"></span>
-					<select ng-change="addToSetList()" ng-hide="!coursesLoaded || isEmptyArray(courses)" ng-model="selectedCourse"
-									ng-options="course.catalog_num + ': ' + courseName(course) + ' (' + course.meeting_days + ' ' + reduceHour(course.start_time) + ' - ' + reduceHour(course.end_time) + ', ' + lastName(course.instructor) + ')' for course in courses | orderBy: 'catalog_num'">
+					<select ng-change="setSelectedCourse()" ng-hide="!coursesLoaded || isEmptyArray(courses)" ng-model="selectedCourse"
+									ng-options="course.catalog_num + ': ' + courseName(course) + ' (' + course.meeting_days + ' ' + reduceHour(course.start_time) + ' - ' + reduceHour(course.end_time) + ', ' + lastName(course.instructor.name) + ')' for course in courses | orderBy: 'catalog_num'">
 					</select>
+                    <select ng-show="hasLab" ng-change="setSelectedComponent()" ng-hide="!hasLab" ng-model="selectedComponent" ng-options="component.component + ' (' + component.meeting_days + ' ' + reduceHour(component.start_time) + ' - ' + reduceHour(component.end_time) +')' for component in courseComponents(selectedCourse)"></select>
+
 					<div ng-show="coursesLoaded && isEmptyArray(courses)">There are no available classes in that subject. Try choosing another subject!</div>
 				</div>
 

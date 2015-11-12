@@ -6,6 +6,7 @@ var app = angular.module('mainController', []);
 
 app.controller('mainController', function($scope, $http, ASG){
 	$scope.loaded = false;
+    $scope.hasLab = false;
 	$scope.coursesLoaded = true;
 	$scope.term = 4600;
 	$scope.setList = [];
@@ -56,7 +57,35 @@ app.controller('mainController', function($scope, $http, ASG){
 		}
 		$scope.selectedCourse = false;
 	};
-
+    $scope.setSelectedCourse = function(){
+        var course = $scope.selectedCourse;
+		var i = arrayContains($scope.setList, course);
+		if (i === false){
+			course.priority = 1;
+			hasFullInfo(course);
+            console.log(course.course_components)
+            console.log(course.course_components.length)
+            if(!course.course_components.length){
+			 $scope.setList.push(course);
+		      $scope.selectedCourse = false;
+            } else {
+                $scope.hasLab = true;
+                console.log($scope.selectedCourse)
+            }
+		}
+    };
+    $scope.setSelectedComponent = function(){
+//        var course = $scope.selectedCourse;
+//        var component = $scope.selectedComponent;
+//		var i = arrayContains($scope.setList, course);
+//		if (i === false){
+//			course.priority = 1;
+//            $scope.setList.push(course);
+//            $scope.selectedCourse = false;
+//            $scope.hasLab = false;
+//            }
+//		}
+    };
 	// Remove a course from the list of selected courses
 	$scope.removeFromSetList = function(course){
 		var i = arrayContains($scope.setList, course);
@@ -126,6 +155,12 @@ app.controller('mainController', function($scope, $http, ASG){
 			return "Staff";
 		}
 	};
+    
+    $scope.courseComponents = function(course){
+        console.log(course.course_components);
+        return course.course_components;
+        
+    }
 
 	$scope.handleEvent = function(ev){
 		if ($scope.setList.length > 0 && ev.charCode == 13){
@@ -231,6 +266,24 @@ app.controller('mainController', function($scope, $http, ASG){
 	    course1.start_time <= course2.start_time && course1.end_time >= course2.end_time ||
 	    course2.start_time <= course1.start_time && course2.end_time >= course1.end_time));
   }
+
+//	$scope.$watch('hasLab', function(){
+//		$scope.hasLab = false;
+//		if ($scope.loaded){
+//			$scope.coursesLoaded = false;
+//			ASG.getCourses($scope.term, $scope.selectedSubject.symbol)
+//			.success(function(data){
+//				console.log("GET");
+//				$scope.courses = data;
+//				$scope.coursesLoaded = true;
+//			})
+//			.error(function(err){
+//				console.log(err);
+//				$scope.courses = [];
+//				$scope.coursesLoaded = true;
+//			});
+//		}
+//	});
 
   // Checks if a given course has specific fields defined or not
   function hasFullInfo(course){
