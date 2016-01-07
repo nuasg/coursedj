@@ -121,7 +121,7 @@
 				<div ng-show="setList">
 					<div class="course" ng-repeat="course in setList | orderBy: 'subject'">
 						<span class="fa fa-close red" ng-click="removeFromSetList(course)"></span>
-						<strong>{{course.subject}} {{course.catalog_num}}:</strong> {{courseName(course)}} ({{course.meeting_days}} {{reduceHour(course.start_time)}} - {{reduceHour(course.end_time)}}, {{lastName(course.instructor)}})
+						<strong>{{course.subject}} {{course.catalog_num}}:</strong> {{courseName(course)}} ({{course.meeting_days}} {{reduceHour(course.start_time)}} - {{reduceHour(course.end_time)}}, {{lastName(course.instructor.name)}})
 						<form name="priority">
 							<input type="radio" ng-model="course.priority" name="priority" ng-value="1" checked="checked" />Optional
 							<input type="radio" ng-model="course.priority" name="priority" ng-value="2" />Preferred

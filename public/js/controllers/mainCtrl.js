@@ -75,16 +75,16 @@ app.controller('mainController', function($scope, $http, ASG){
 		}
     };
     $scope.setSelectedComponent = function(){
-//        var course = $scope.selectedCourse;
-//        var component = $scope.selectedComponent;
-//		var i = arrayContains($scope.setList, course);
-//		if (i === false){
-//			course.priority = 1;
-//            $scope.setList.push(course);
-//            $scope.selectedCourse = false;
-//            $scope.hasLab = false;
-//            }
-//		}
+        var course = $scope.selectedCourse;
+        var component = $scope.selectedComponent;
+		var i = arrayContains($scope.setList, course);
+		if (i === false){
+			course.priority = 1;
+            $scope.setList.push(course);
+            $scope.setList.push(component);
+            $scope.selectedCourse = false;
+            }
+            $scope.hasLab = false;
     };
 	// Remove a course from the list of selected courses
 	$scope.removeFromSetList = function(course){
