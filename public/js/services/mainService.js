@@ -2,18 +2,22 @@
 
 var app = angular.module('mainService', []);
 
-app.factory('ASG', function($http, $location){
+app.factory('ASG', function($http, $location) {
+	var NOT_A_KEY;
 	if ($location.$$host === 'localhost') {
-		var NOT_A_KEY = "P2VVnfB0PwGQpdqh"; //DEBUG
+		NOT_A_KEY = "P2VVnfB0PwGQpdqh"; // DEBUG
 	} else {
-		var NOT_A_KEY = "aSjUsc00dvwfNZ9E"; //LIVE 
+		NOT_A_KEY = "aSjUsc00dvwfNZ9E"; // LIVE
 	}
-	return{
+	return {
 		getSubjects: function(term){
 			return $http.get('http://api.asg.northwestern.edu/subjects/?key=' + NOT_A_KEY+ '&term=' + term);
 		},
 		getCourses: function(term, subject){
 			return $http.get('http://api.asg.northwestern.edu/courses/?key=' + NOT_A_KEY + '&term=' + term + '&subject=' + subject);
+		},
+		getTerms: function() {
+			return $http.get('https://api.asg.northwestern.edu/terms?key=' + NOT_A_KEY);
 		}
 	};
 });

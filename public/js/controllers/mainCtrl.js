@@ -1,49 +1,60 @@
 // js/controllers/mainCtrl.js
 
-// Main controller- all functionality is here
-
 var app = angular.module('mainController', []);
 
-app.controller('mainController', function($scope, $http, ASG){
-	$scope.loaded = false;
-	$scope.coursesLoaded = true;
-	$scope.term = 4610;
+app.controller('mainController', function($scope, ASG) {
+	// Debug helper
+	window.MY_SCOPE = $scope;
+
+	// Fetch TERMS
+	ASG.getTerms()
+		.success(function(data) {
+			$scope.terms = data;
+			$scope.selectedTerm = $scope.terms[0];
+		})
+		.error(function(err) {
+			console.log(err);
+		});
+
+	// Refresh SUBJECTS on TERM change
+	$scope.$watch('selectedTerm', function() {
+		if (!$scope.selectedTerm) return;
+
+		ASG.getSubjects($scope.selectedTerm.id)
+			.success(function(data) {
+				$scope.subjects = data;
+				$scope.selectedSubject = null;
+				$scope.courses = null;
+				$scope.selectedCourse = null;
+			})
+			.error(function(err) {
+				console.log(err);
+			});
+	});
+
+	// Refresh COURSES on SUBJECT change
+	$scope.$watch('selectedSubject', function() {
+		if (!$scope.selectedSubject) return;
+
+		ASG.getCourses($scope.selectedTerm.id, $scope.selectedSubject.symbol)
+			.success(function(data) {
+				$scope.courses = data;
+				$scope.selectedCourse = null;
+			})
+			.error(function(err) {
+				console.log(err);
+			});
+	});
+
+
 	$scope.setList = [];
 	$scope.events = [];
 	$scope.courseCount = 4;
 	$scope.conflict = false;
 	var colors = ["green", "blue", "purple", "orange", "grey"];
 
-	// GET a list of subjects
-	ASG.getSubjects($scope.term)
-		.success(function(data){
-			console.log("GET");
-			$scope.subjects = data;
-			$scope.loaded = true;
-		})
-		.error(function(err){
-			console.log(err);
-			$scope.loaded = true;
-		});
 
-	// When a subject is selected, GET all the courses for that given subject
-	$scope.$watch('selectedSubject', function(){
-		$scope.selectedCourse = false;
-		if ($scope.loaded){
-			$scope.coursesLoaded = false;
-			ASG.getCourses($scope.term, $scope.selectedSubject.symbol)
-			.success(function(data){
-				console.log("GET");
-				$scope.courses = data;
-				$scope.coursesLoaded = true;
-			})
-			.error(function(err){
-				console.log(err);
-				$scope.courses = [];
-				$scope.coursesLoaded = true;
-			});
-		}
-	});
+
 
 	// Add a course to the list of selected courses
 	$scope.addToSetList = function(){
