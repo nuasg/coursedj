@@ -16,7 +16,6 @@ app.controller('mainController', function($scope, ASG) {
 		.success(function(data) {
 			$scope.terms = data;
 			$scope.selectedTerm = $scope.terms[0];
-
 		})
 		.error(function(err) {
 			console.log(err);
@@ -56,14 +55,17 @@ app.controller('mainController', function($scope, ASG) {
 
 				// arrange the data into a hash table, with the course subject and number as the key (i.e. "EECS 110-0")
 				var coursesBySubjNum = {};
-
 				for (var i = 0; i < data.length; i++) {
-					var key = data[i].subject + " " + data[i].catalog_num;	// "EECS 110-0"
+					var key;
+					if (data[i].topic) {
+						key = data[i].subject + " " + data[i].catalog_num + "-" + data[i].section + ": " + data[i].topic;
+					} else {
+						key = data[i].subject + " " + data[i].catalog_num + ": " + data[i].title;	// "EECS 110-0"
+					}
 
 					coursesBySubjNum[key] = coursesBySubjNum[key] || [];
 					coursesBySubjNum[key].push(data[i]);
 				}
-
 				$scope.courses = coursesBySubjNum;
 
 			})
@@ -71,6 +73,24 @@ app.controller('mainController', function($scope, ASG) {
 				console.log(err);
 			});
 	});
+
+	/*
+	 * SCHEDULING CODE
+	 * This code is responsible for letting users add courses to their cart, as well as maintaining a list of possibilities
+	 */
+	$scope.cart = [];
+
+	$scope.addToCart = function(selectedCourse) {
+		$scope.cart.push(selectedCourse);
+	};
+
+	function hasAllTimeInfo(course) {
+		return course.meeting_days !== null && course.start_time !== null && course.end_time !== null;
+	}
+
+
+
+
 
 
 	// some constants
@@ -82,24 +102,9 @@ app.controller('mainController', function($scope, ASG) {
 		"grey"
 	];
 
-	$scope.cart = [];
-
 	$scope.events = [];
 	$scope.courseCount = 4;
 	$scope.conflict = false;
-
-
-	/*
-	 * SCHEDULING CODE
-	 * This code is responsible for letting users add courses to their cart, as well as maintaining a list of possibilities
-	 */
-	$scope.addToCart = function(selectedCourse) {
-		$scope.cart.push(selectedCourse);
-	};
-
-	function hasAllTimeInfo(course) {
-		return course.meeting_days !== null && course.start_time !== null && course.end_time !== null;
-	}
 
 	// Remove a course from the list of selected courses
 	$scope.removeFromSetList = function(course){

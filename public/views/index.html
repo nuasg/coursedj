@@ -90,7 +90,7 @@
 				<select ng-model="selectedSubject" ng-options="subject.symbol + ' - ' + subject.name for subject in subjects | orderBy: 'symbol'" class="selected-sub"></select>
 
 				<div>Course</div>
-				<select ng-model="selectedCourse" ng-options="key + ': ' + course[0].title for (key, course) in courses | orderBy: course[0].catalog_num"
+				<select ng-model="selectedCourse" ng-options="key for (key, course) in courses | orderBy: course[0].catalog_num"
 								ng-change="addToCart(selectedCourse)">
 				</select>
 
@@ -105,7 +105,9 @@
 					Step 2: Pick Schedule
 				</div>
 
-				<div class="course" ng-repeat="course in setList | orderBy: 'subject'">
+				<div class="cart-panel" ng-repeat=""
+
+				<!-- <div class="course" ng-repeat="course in setList | orderBy: 'subject'">
 					<span class="fa fa-close red" ng-click="removeFromSetList(course)"></span>
 					<strong>{{course.subject}} {{course.catalog_num}}:</strong> {{courseName(course)}} ({{course.meeting_days}} {{reduceHour(course.start_time)}} - {{reduceHour(course.end_time)}}, {{lastName(course.instructor)}})
 					<form name="priority">
@@ -124,7 +126,7 @@
 					</form>
 				</div>
 
-				<button ng-show="setList[0]" ng-click="remix()">Remix!</button>
+				<button ng-show="setList[0]" ng-click="remix()">Remix!</button> -->
 
 			</div>
 		</div> <!-- Class Selection Column -->
