@@ -4,4 +4,4 @@ var app = angular.module('CourseDJ', [
 	'dhxScheduler',
 	'mainController',
 	'mainService',
-]);	
+]);

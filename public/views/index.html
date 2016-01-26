@@ -73,11 +73,14 @@
 
 	<div class="row body-row" id="body">
 
-		<!-- Class Selection Column -->
+		<!-- Sidebar -->
 		<div class="body-left col-left col-sm-4 col-md-3 col-lg-2" id="form">
+
+			<!-- Class Selection -->
 			<div class="class-add class-pick">
+
 				<div class="form-title">
-					Pick Your Classes
+					Step 1: Add Classes
 				</div>
 
 				<div>Term</div>
@@ -86,22 +89,22 @@
 				<div>Subject</div>
 				<select ng-model="selectedSubject" ng-options="subject.symbol + ' - ' + subject.name for subject in subjects | orderBy: 'symbol'" class="selected-sub"></select>
 
-				<div ng-show="selectedSubject"><div>Course</div>
-					<select ng-change="addToSetList()" ng-hide="isEmptyArray(courses)" ng-model="selectedCourse"
-									ng-options="course.catalog_num + ': ' + courseName(course) + ' (' + course.meeting_days + ' ' + reduceHour(course.start_time) + ' - ' + reduceHour(course.end_time) + ', ' + lastName(course.instructor) + ')' for course in courses | orderBy: 'catalog_num'">
-					</select>
-					<div ng-show="isEmptyArray(courses)">There are no available classes in that subject. Try choosing another subject!</div>
-				</div>
+				<div>Course</div>
+				<select ng-model="selectedCourse" ng-options="key + ': ' + course[0].title for (key, course) in courses | orderBy: course[0].catalog_num"
+								ng-change="addToCart()">
+				</select>
 
-				<!-- <div class="selected-course green" ng-show="selectedCourse">{{selectedCourse.subject}} {{selectedCourse.catalog_num}}: {{selectedCourse.title}}</div>
-				<button class="add" ng-show="selectedCourse" ng-click="">Add!</button> -->
+				<div ng-show="noCourses">No available courses in that subject.</div>
 
 			</div>
 
+			<!-- Schedule Selection -->
 			<div class="class-add">
+
 				<div class="form-title">
-					Classes Added
+					Step 2: Pick Schedule
 				</div>
+
 				<div ng-show="setList">
 					<div class="course" ng-repeat="course in setList | orderBy: 'subject'">
 						<span class="fa fa-close red" ng-click="removeFromSetList(course)"></span>

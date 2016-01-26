@@ -14,7 +14,7 @@ app.factory('ASG', function($http, $location) {
 			return $http.get('http://api.asg.northwestern.edu/subjects/?key=' + NOT_A_KEY+ '&term=' + term);
 		},
 		getCourses: function(term, subject){
-			return $http.get('http://api.asg.northwestern.edu/courses/?key=' + NOT_A_KEY + '&term=' + term + '&subject=' + subject);
+			return $http.get('http://api.asg.northwestern.edu/courses/details/?key=' + NOT_A_KEY + '&term=' + term + '&subject=' + subject);
 		},
 		getTerms: function() {
 			return $http.get('https://api.asg.northwestern.edu/terms?key=' + NOT_A_KEY);

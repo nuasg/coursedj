@@ -3,14 +3,20 @@
 var app = angular.module('mainController', []);
 
 app.controller('mainController', function($scope, ASG) {
-	// Debug helper
+	// Debug helper--allows access to $scope from console;
 	window.MY_SCOPE = $scope;
 
-	// Fetch TERMS
+	/*
+	 * API CODE
+	 * This code is responsible for hitting the API and storing "raw" course data
+	 */
+	$scope.noCourses = false;
+
 	ASG.getTerms()
 		.success(function(data) {
 			$scope.terms = data;
 			$scope.selectedTerm = $scope.terms[0];
+
 		})
 		.error(function(err) {
 			console.log(err);
@@ -24,8 +30,11 @@ app.controller('mainController', function($scope, ASG) {
 			.success(function(data) {
 				$scope.subjects = data;
 				$scope.selectedSubject = null;
+
+				// we can't have courses if we don't know subjects, so clear them
 				$scope.courses = null;
 				$scope.selectedCourse = null;
+
 			})
 			.error(function(err) {
 				console.log(err);
@@ -38,8 +47,25 @@ app.controller('mainController', function($scope, ASG) {
 
 		ASG.getCourses($scope.selectedTerm.id, $scope.selectedSubject.symbol)
 			.success(function(data) {
-				$scope.courses = data;
-				$scope.selectedCourse = null;
+				// corner case for subjects with no courses
+				if (data.length === 0) {
+					$scope.noCourses = true;
+					return;
+				}
+				$scope.noCourses = false;
+
+				// arrange the data into a hash table, with the course subject and number as the key (i.e. "EECS 110-0")
+				var coursesBySubjNum = {};
+
+				for (var i = 0; i < data.length; i++) {
+					var key = data[i].subject + " " + data[i].catalog_num;	// "EECS 110-0"
+
+					coursesBySubjNum[key] = coursesBySubjNum[key] || [];
+					coursesBySubjNum[key].push(data[i]);
+				}
+
+				$scope.courses = coursesBySubjNum;
+				
 			})
 			.error(function(err) {
 				console.log(err);
@@ -47,14 +73,24 @@ app.controller('mainController', function($scope, ASG) {
 	});
 
 
+	// some constants
+	var COLORS = [
+		"green",
+		"blue",
+		"purple",
+		"orange",
+		"grey"
+	];
 	$scope.setList = [];
 	$scope.events = [];
 	$scope.courseCount = 4;
 	$scope.conflict = false;
-	var colors = ["green", "blue", "purple", "orange", "grey"];
 
 
-
+	/*
+	 * SCHEDULING CODE
+	 * This code is responsible for letting users add courses to their cart, as well as maintaining a list of possibilities
+	 */
 
 	// Add a course to the list of selected courses
 	$scope.addToSetList = function(){
@@ -100,7 +136,7 @@ app.controller('mainController', function($scope, ASG) {
 		for (var i=0; i<chosenDates.length; i++){
 			var title = chosenDates[i].subject + " " + chosenDates[i].catalog_num;
 			var days = parseDays(chosenDates[i].meeting_days);
-			var clr = colors[i];
+			var clr = COLORS[i];
 			for (var j=0; j<days.length; j++){
 				$scope.events.push({
 					text: title,
