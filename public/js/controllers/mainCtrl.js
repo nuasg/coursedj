@@ -83,7 +83,14 @@ app.controller('mainController', function($scope, ASG) {
 	$scope.addToCart = function(selectedCourse) {
 		$scope.cart.push(selectedCourse);
 	};
-
+    
+	$scope.removeFromCart = function(course){
+		var i = arrayContains($scope.cart, course);
+		if (i !== false){
+			$scope.cart.splice(i, 1);
+		}
+	};
+    
 	function hasAllTimeInfo(course) {
 		return course.meeting_days !== null && course.start_time !== null && course.end_time !== null;
 	}
@@ -106,13 +113,7 @@ app.controller('mainController', function($scope, ASG) {
 	$scope.courseCount = 4;
 	$scope.conflict = false;
 
-	// Remove a course from the list of selected courses
-	$scope.removeFromSetList = function(course){
-		var i = arrayContains($scope.setList, course);
-		if (i !== false){
-			$scope.setList.splice(i, 1);
-		}
-	};
+
 
 	// Check if an array is empty
 	$scope.isEmptyArray = function(arr){

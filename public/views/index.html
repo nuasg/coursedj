@@ -105,7 +105,16 @@
 					Step 2: Pick Schedule
 				</div>
 
-				<div class="cart-panel" ng-repeat=""
+				<div class="cart-panel" ng-repeat="course in cart">
+                    <span class="glyphicon glyphicon-remove red" ng-click="removeFromCart(course)"></span>
+                    {{course[0].subject}} {{course[0].catalog_num}} </br>
+                    {{course[0].topic || course[0].title}} </br>
+                    Sections: </br>
+<!--                    <select ng-model="selectedSection" ng-options="section.meeting_days + ' ' + section.start_time + '-' + section.end_time +' | '+ section.instructor.name for section in course" ng-init="selectedSection = course[0]">-->
+                        
+                        
+                    </div>
+                </div>
 
 				<!-- <div class="course" ng-repeat="course in setList | orderBy: 'subject'">
 					<span class="fa fa-close red" ng-click="removeFromSetList(course)"></span>
