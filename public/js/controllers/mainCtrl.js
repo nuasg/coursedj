@@ -65,7 +65,7 @@ app.controller('mainController', function($scope, ASG) {
 				}
 
 				$scope.courses = coursesBySubjNum;
-				
+
 			})
 			.error(function(err) {
 				console.log(err);
@@ -81,7 +81,9 @@ app.controller('mainController', function($scope, ASG) {
 		"orange",
 		"grey"
 	];
-	$scope.setList = [];
+
+	$scope.cart = [];
+
 	$scope.events = [];
 	$scope.courseCount = 4;
 	$scope.conflict = false;
@@ -91,18 +93,13 @@ app.controller('mainController', function($scope, ASG) {
 	 * SCHEDULING CODE
 	 * This code is responsible for letting users add courses to their cart, as well as maintaining a list of possibilities
 	 */
-
-	// Add a course to the list of selected courses
-	$scope.addToSetList = function(){
-		var course = $scope.selectedCourse;
-		var i = arrayContains($scope.setList, course);
-		if (i === false){
-			course.priority = 1;
-			hasFullInfo(course);
-			$scope.setList.push(course);
-		}
-		$scope.selectedCourse = false;
+	$scope.addToCart = function(selectedCourse) {
+		$scope.cart.push(selectedCourse);
 	};
+
+	function hasAllTimeInfo(course) {
+		return course.meeting_days !== null && course.start_time !== null && course.end_time !== null;
+	}
 
 	// Remove a course from the list of selected courses
 	$scope.removeFromSetList = function(course){
@@ -277,14 +274,6 @@ app.controller('mainController', function($scope, ASG) {
 	    course2.start_time <= course1.end_time && course2.start_time >= course1.start_time ||
 	    course1.start_time <= course2.start_time && course1.end_time >= course2.end_time ||
 	    course2.start_time <= course1.start_time && course2.end_time >= course1.end_time));
-  }
-
-  // Checks if a given course has specific fields defined or not
-  function hasFullInfo(course){
-  	if (course.meeting_days === null || course.start_time === null || course.end_time === null){
-  		course.incompleteInfo = true;
-  		alert("Careful! The course you just added has incomplete information from the registrar and will be unable to be displayed. You may want to remove this course from your Classes Added to not throw off your results.");
-  	}
   }
 
 });

@@ -91,31 +91,30 @@
 
 				<div>Course</div>
 				<select ng-model="selectedCourse" ng-options="key + ': ' + course[0].title for (key, course) in courses | orderBy: course[0].catalog_num"
-								ng-change="addToCart()">
+								ng-change="addToCart(selectedCourse)">
 				</select>
 
 				<div ng-show="noCourses">No available courses in that subject.</div>
 
 			</div>
 
-			<!-- Schedule Selection -->
+			<!-- Cart -->
 			<div class="class-add">
 
 				<div class="form-title">
 					Step 2: Pick Schedule
 				</div>
 
-				<div ng-show="setList">
-					<div class="course" ng-repeat="course in setList | orderBy: 'subject'">
-						<span class="fa fa-close red" ng-click="removeFromSetList(course)"></span>
-						<strong>{{course.subject}} {{course.catalog_num}}:</strong> {{courseName(course)}} ({{course.meeting_days}} {{reduceHour(course.start_time)}} - {{reduceHour(course.end_time)}}, {{lastName(course.instructor)}})
-						<form name="priority">
-							<input type="radio" ng-model="course.priority" name="priority" ng-value="1" checked="checked" />Optional
-							<input type="radio" ng-model="course.priority" name="priority" ng-value="2" />Preferred
-							<input type="radio" ng-model="course.priority" name="priority" ng-value="10" />Mandatory
-						</form>
-					</div>
+				<div class="course" ng-repeat="course in setList | orderBy: 'subject'">
+					<span class="fa fa-close red" ng-click="removeFromSetList(course)"></span>
+					<strong>{{course.subject}} {{course.catalog_num}}:</strong> {{courseName(course)}} ({{course.meeting_days}} {{reduceHour(course.start_time)}} - {{reduceHour(course.end_time)}}, {{lastName(course.instructor)}})
+					<form name="priority">
+						<input type="radio" ng-model="course.priority" name="priority" ng-value="1" checked="checked" />Optional
+						<input type="radio" ng-model="course.priority" name="priority" ng-value="2" />Preferred
+						<input type="radio" ng-model="course.priority" name="priority" ng-value="10" />Mandatory
+					</form>
 				</div>
+
 				<div class="class-count">
 					<form name="count" ng-show="setList[0]">
 						<div>Chosen Classes:</div>
