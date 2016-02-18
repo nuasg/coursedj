@@ -79,9 +79,34 @@ app.controller('mainController', function($scope, ASG) {
 	 * This code is responsible for letting users add courses to their cart, as well as maintaining a list of possibilities
 	 */
 	$scope.cart = [];
-
+    $scope.discussions = {};
 	$scope.addToCart = function(selectedCourse) {
 		$scope.cart.push(selectedCourse);
+	};
+    
+    $scope.addToDiscussionCart = function(isChecked,discussion_section, section_id,selectedDiscussion) {
+        if(isChecked){
+
+            if(section_id in $scope.discussions){
+                var arr = $scope.discussions[section_id];
+                arr.push(selectedDiscussion);
+                $scope.discussions[section_id] = arr;
+            } else {
+                 $scope.discussions[section_id] = [selectedDiscussion];
+            }
+        } else {
+            var arr = $scope.discussions[section_id];
+            for(var i = 0; i < arr.length; i++) {
+                section = arr[i];
+                if(section.section == discussion_section){
+                    arr.splice(arr.indexOf(section),1); 
+                }
+            $scope.discussions[section_id] = arr;
+
+            }
+        }
+        console.log($scope.discussions);
+
 	};
     
 	$scope.removeFromCart = function(course){

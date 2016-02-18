@@ -114,10 +114,10 @@
                         <div ng-repeat="section in course">
                             {{section.meeting_days}} {{section.start_time}}-{{section.end_time}}</br>
             {{section.instructor.name}}
-                        <div ng-show="section.course_components">
+                        <div ng-show="section.course_components[0]">
                             Labs:
                             <div class="discussion" ng-repeat="discussion in section.course_components">
-                                {{discussion.meeting_days}} {{discussion.start_time}}-{{discussion.end_time}}</br>
+                                <input type="checkbox" ng-model="discussion.section_section.course_id" ng-change="addToDiscussionCart(discussion.section_section.course_id,discussion.section,section.course_id,discussion)"> {{discussion.meeting_days}} {{discussion.start_time}}-{{discussion.end_time}}</br>
                                 {{discussion.room}}
                             </div>
                         </div>
