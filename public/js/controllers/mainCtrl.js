@@ -110,10 +110,17 @@ app.controller('mainController', function($scope, ASG) {
 	};
     
 	$scope.removeFromCart = function(course){
+        console.log(course[0])
+        console.log($scope.discussions[course[0].course_id]);
 		var i = arrayContains($scope.cart, course);
 		if (i !== false){
 			$scope.cart.splice(i, 1);
 		}
+        
+        if ($scope.discussions[course[0].course_id]) {
+            console.log("jello:")
+        delete $scope.discussions[course[0].course_id];
+        }
 	};
     
 	function hasAllTimeInfo(course) {
@@ -159,7 +166,7 @@ app.controller('mainController', function($scope, ASG) {
 		$scope.conflict = false;
 
 		$scope.events = [];
-		var chosenDates = scramble($scope.setList);
+		var chosenDates = scramble($scope.cart);
 
 		for (var i=0; i<chosenDates.length; i++){
 			var title = chosenDates[i].subject + " " + chosenDates[i].catalog_num;
@@ -203,7 +210,7 @@ app.controller('mainController', function($scope, ASG) {
 	};
 
 	$scope.handleEvent = function(ev){
-		if ($scope.setList.length > 0 && ev.charCode == 13){
+		if ($scope.cart.length > 0 && ev.charCode == 13){
 			$scope.remix();
 		}else if(ev.charCode == 13){
 			alert("You haven't chosen any courses yet! Select some classes then try again!");
